@@ -20,7 +20,14 @@ jobs:
           run_started_time=${{ env.GITHUB_RUN_ID }}
           running_time=$((current_time - run_started_time))
           echo "Running Time: $running_time seconds" 
-  deploy_apps:
+  test_1:
+    runs-on: self-hosted
+    needs: test-plan
+    if: github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/heads/deploy/')
+    steps:
+      - name: Test run
+        run: echo "This is a test"
+  test_2:
     runs-on: self-hosted
     needs: test-plan
     if: github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/heads/deploy/')
