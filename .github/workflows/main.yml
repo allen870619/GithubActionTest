@@ -1,0 +1,30 @@
+name: Action_test
+run-name: whole_ci_cd
+on: [push, pull_request]
+jobs:
+  test-plan: 
+    runs-on: self-hosted
+    steps:
+      - name: Checkout project file
+        uses: actions/checkout@v4
+      - name: Get Current Time
+        id: current_time
+        uses: actions/github-script@v4
+        with:
+          script: |
+            const currentTime = Math.floor(new Date().getTime() / 1000);
+            console.log(`::set-output name=time::${currentTime}`);
+      - name: Calculate Running Time
+        run: |
+          current_time=$(date +%s)
+          run_started_time=${{ env.GITHUB_RUN_ID }}
+          running_time=$((current_time - run_started_time))
+          echo "Running Time: $running_time seconds" 
+  deploy_apps:
+    runs-on: self-hosted
+    needs: test-plan
+    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/deploy'
+    step:
+      - name: Test run
+        run: echo "This is a test"
+
