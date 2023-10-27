@@ -2,62 +2,74 @@ name: Action_test
 run-name: whole_ci_cd
 on: [push, pull_request]
 jobs:
-  test-plan: 
+  job1:
     runs-on: self-hosted
     steps:
-      - name: Set Job Start Time
-        run: echo "start_time=$(date +%s)" >> $GITHUB_ENV
+      - name: Set variable
+        run: echo "MY_VARIABLE=Hello" >> $GITHUB_ENV
+
+  job2:
+    needs: job1
+    runs-on: self-hosted
+    steps:
+      - name: Read variable
+        run: echo $MY_VARIABLE
+  # test-plan: 
+  #   runs-on: self-hosted
+  #   steps:
+  #     - name: Set Job Start Time
+  #       run: echo "start_time=$(date +%s)" >> $GITHUB_ENV
     
-      - name: Test
-        run: echo "OAO_NAME=OOGOGOG" >> $GITHUB_ENV
+  #     - name: Test
+  #       run: echo "OAO_NAME=OOGOGOG" >> $GITHUB_ENV
 
 
-      - name: Checkout project file
-        uses: actions/checkout@v4
+  #     - name: Checkout project file
+  #       uses: actions/checkout@v4
 
-      - name: Sleep for 3 seconds
-        run: sleep 3
+  #     - name: Sleep for 3 seconds
+  #       run: sleep 3
       
-      - name: Calculate Running Time
-        run: |
-          current_time=$(date +%s)
-          running_time=$((current_time - start_time))
-          if [ $running_time > 60 ]
-          then
-            minute=$(( running_time / 60))
-            second=$(( running_time % 60))
-            echo "$((minute)) min $((second)) sec"
-          fi
+  #     - name: Calculate Running Time
+  #       run: |
+  #         current_time=$(date +%s)
+  #         running_time=$((current_time - start_time))
+  #         if [ $running_time > 60 ]
+  #         then
+  #           minute=$(( running_time / 60))
+  #           second=$(( running_time % 60))
+  #           echo "$((minute)) min $((second)) sec"
+  #         fi
 
-  test_1:
-    runs-on: self-hosted
-    needs: test-plan
-    if: github.ref == 'refs/heads/main'
-    steps:
-      - name: Test run
-        run: echo "This is a test"
-  test_2:
-    runs-on: self-hosted
-    needs: test-plan
-    if: github.ref == 'refs/heads/main'
-    steps:
-      - name: Test run
-        run: echo "This is a test"
-  test_3:
-    runs-on: self-hosted
-    needs: [test-plan, test_1, test_2]
-    if: always()
-    steps:
-      - name: OAO
-        run: echo $OAO_NAME
-      - name: Calculate Running Time
-        run: |
-          current_time=$(date +%s)
-          echo $start_time
-          running_time=$((current_time - start_time))
-          if [ $running_time -gt 60 ]
-          then
-            minute=$(( running_time / 60))
-            second=$(( running_time % 60))
-            echo "$((minute)) min $((second)) sec"
-          fi
+  # test_1:
+  #   runs-on: self-hosted
+  #   needs: test-plan
+  #   if: github.ref == 'refs/heads/main'
+  #   steps:
+  #     - name: Test run
+  #       run: echo "This is a test"
+  # test_2:
+  #   runs-on: self-hosted
+  #   needs: test-plan
+  #   if: github.ref == 'refs/heads/main'
+  #   steps:
+  #     - name: Test run
+  #       run: echo "This is a test"
+  # test_3:
+  #   runs-on: self-hosted
+  #   needs: [test-plan, test_1, test_2]
+  #   if: always()
+  #   steps:
+  #     - name: OAO
+  #       run: echo $OAO_NAME
+  #     - name: Calculate Running Time
+  #       run: |
+  #         current_time=$(date +%s)
+  #         echo $start_time
+  #         running_time=$((current_time - start_time))
+  #         if [ $running_time -gt 60 ]
+  #         then
+  #           minute=$(( running_time / 60))
+  #           second=$(( running_time % 60))
+  #           echo "$((minute)) min $((second)) sec"
+  #         fi
