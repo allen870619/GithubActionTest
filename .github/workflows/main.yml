@@ -23,15 +23,22 @@ jobs:
   test_1:
     runs-on: self-hosted
     needs: test-plan
-    if: github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/heads/deploy/')
+    if: github.ref == 'refs/heads/main'
     steps:
       - name: Test run
         run: echo "This is a test"
   test_2:
     runs-on: self-hosted
     needs: test-plan
-    if: github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/heads/deploy/')
+    if: github.ref == 'refs/heads/main'
     steps:
       - name: Test run
         run: echo "This is a test"
+  test_3:
+    runs-on: self-hosted
+    needs: [test_1, test_2]
+    if: always()
+    steps:
+      - name: OAO
+        run: echo "Hi" 
 
