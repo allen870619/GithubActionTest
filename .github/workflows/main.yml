@@ -1,12 +1,17 @@
 name: Action_test
 run-name: whole_ci_cd
 on: [push, pull_request]
+env:
+  test: 
 jobs:
   job1:
     runs-on: self-hosted
     steps:
       - name: Set variable
         run: echo "MY_VARIABLE=Hello" >> $GITHUB_ENV
+
+      - name: Test
+        run: echo "START_TIME=${{ github.run_started_at }}" >> $GITHUB_ENV
 
       - name: A
         run: env
