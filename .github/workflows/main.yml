@@ -46,7 +46,7 @@ jobs:
     steps:
       - name: OAO
         run: echo "Hi" 
-       - name: Calculate Running Time
+      - name: Calculate Running Time
         run: |
           current_time=$(date +%s)
           running_time=$((current_time - start_time))
