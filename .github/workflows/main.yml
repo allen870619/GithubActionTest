@@ -20,15 +20,13 @@ jobs:
       #     run_started_time=${{ env.GITHUB_RUN_ID }}
       #     running_time=$((current_time - run_started_time))
       #     echo "Running Time: $running_time seconds" 
-      - name: Get Current Time
-        id: current_time
-        run: echo "::set-output name=time::$(date +%s)"
+      - name: Set Job Start Time
+        run: echo "start_time=$(date +%s)" >> $GITHUB_ENV
       
       - name: Calculate Running Time
         run: |
           current_time=$(date +%s)
-          run_started_time=${{ env.GITHUB_RUN_STARTED }}
-          running_time=$((current_time - run_started_time))
+          running_time=$((current_time - start_time))
           echo "Running Time: $running_time seconds"
 
   test_1:
