@@ -8,10 +8,15 @@ jobs:
       - name: Set variable
         run: echo "MY_VARIABLE=Hello" >> $GITHUB_ENV
 
+      - name: A
+        run: env
+
   job2:
     needs: job1
     runs-on: self-hosted
     steps:
+      - name: A
+        run: env
       - name: Read variable
         run: echo $MY_VARIABLE
   # test-plan: 
