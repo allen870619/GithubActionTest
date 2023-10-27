@@ -11,10 +11,10 @@ jobs:
         run: echo "MY_VARIABLE=Hello" >> $GITHUB_ENV
 
       - name: Test
-        run: echo "START_TIME=${{ github.run_started_at }}" >> $GITHUB_ENV
+        run: github
 
       - name: A
-        run: env
+        run: var
 
   job2:
     needs: job1
