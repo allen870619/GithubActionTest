@@ -45,7 +45,7 @@ jobs:
         run: echo "This is a test"
   test_3:
     runs-on: self-hosted
-    needs: [test_1, test_2]
+    needs: [test-plan, test_1, test_2]
     if: always()
     steps:
       - name: OAO
