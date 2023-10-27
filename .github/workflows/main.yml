@@ -1,8 +1,6 @@
 name: Action_test
 run-name: whole_ci_cd
 on: [push, pull_request]
-env:
-  start_time: $(date +%s)
 jobs:
   test-plan: 
     runs-on: self-hosted
