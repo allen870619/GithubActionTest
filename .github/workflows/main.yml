@@ -6,7 +6,7 @@ jobs:
     runs-on: self-hosted
     steps:
       - name: Set Job Start Time
-        run: echo "start_time=$(date +%s)" >> $GITHUB_ENV
+        run: echo "start_time=$(date +%s)" >> $env
       
       - name: Checkout project file
         uses: actions/checkout@v4
