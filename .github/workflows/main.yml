@@ -5,23 +5,11 @@ jobs:
   test-plan: 
     runs-on: self-hosted
     steps:
-      - name: Checkout project file
-        uses: actions/checkout@v4
-      # - name: Get Current Time
-      #   id: current_time
-      #   uses: actions/github-script@v4
-      #   with:
-      #     script: |
-      #       const currentTime = Math.floor(new Date().getTime() / 1000);
-      #       console.log(`::set-output name=time::${currentTime}`);
-      # - name: Calculate Running Time
-      #   run: |
-      #     current_time=$(date +%s)
-      #     run_started_time=${{ env.GITHUB_RUN_ID }}
-      #     running_time=$((current_time - run_started_time))
-      #     echo "Running Time: $running_time seconds" 
       - name: Set Job Start Time
         run: echo "start_time=$(date +%s)" >> $GITHUB_ENV
+      
+      - name: Checkout project file
+        uses: actions/checkout@v4
 
       - name: Sleep for 3 seconds
         run: sleep 3
@@ -30,7 +18,12 @@ jobs:
         run: |
           current_time=$(date +%s)
           running_time=$((current_time - start_time))
-          echo "Running Time: $running_time seconds"
+          if [ $running_time > 60 ]
+          then
+            minute=$(( running_time / 60))
+            second=$(( running_time % 60))
+            echo "$((minute)) min $((second)) sec"
+          fi
 
   test_1:
     runs-on: self-hosted
@@ -53,4 +46,14 @@ jobs:
     steps:
       - name: OAO
         run: echo "Hi" 
+       - name: Calculate Running Time
+        run: |
+          current_time=$(date +%s)
+          running_time=$((current_time - start_time))
+          if [ $running_time > 60 ]
+          then
+            minute=$(( running_time / 60))
+            second=$(( running_time % 60))
+            echo "$((minute)) min $((second)) sec"
+          fi
 
