@@ -1,6 +1,8 @@
 name: Action_test
 run-name: whole_ci_cd
 on: [push, pull_request]
+env:
+  start_time: $(date +%s)
 jobs:
   test-plan: 
     runs-on: self-hosted
@@ -49,6 +51,7 @@ jobs:
       - name: Calculate Running Time
         run: |
           current_time=$(date +%s)
+          echo $start_time
           running_time=$((current_time - start_time))
           if [ $running_time > 60 ]
           then
