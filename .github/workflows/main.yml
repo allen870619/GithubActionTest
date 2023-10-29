@@ -10,9 +10,6 @@ jobs:
       - name: Set variable
         run: echo "MY_VARIABLE=Hello" >> $GITHUB_STATE
 
-      - name: A
-        run: var
-
   job2:
     needs: job1
     runs-on: self-hosted
