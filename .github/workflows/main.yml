@@ -3,12 +3,13 @@ run-name: whole_ci_cd
 on: [push, pull_request]
 env:
   test: ${{date}}
+  MY_VARIABLE:
 jobs:
   job1:
     runs-on: self-hosted
     steps:
       - name: Set variable
-        run: echo "MY_VARIABLE=Hello" >> $GITHUB_STATE
+        run: echo "MY_VARIABLE=Hello" >> $GITHUB_ENV
 
   job2:
     needs: job1
@@ -16,7 +17,7 @@ jobs:
     steps:
       - name: Time
         run: echo ${{env.test}}
-        
+
       - name: Read variable
         run: echo $MY_VARIABLE
   # test-plan: 
