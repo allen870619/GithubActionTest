@@ -2,7 +2,6 @@ name: Action_test
 run-name: whole_ci_cd
 on: [push, pull_request]
 env:
-  test: ${{date}}
   MY_VARIABLE:
 jobs:
   job1:
@@ -15,9 +14,6 @@ jobs:
     needs: job1
     runs-on: self-hosted
     steps:
-      - name: Time
-        run: echo ${{env.test}}
-
       - name: Read variable
         run: echo $MY_VARIABLE
   # test-plan: 
