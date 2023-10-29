@@ -10,9 +10,6 @@ jobs:
       - name: Set variable
         run: echo "MY_VARIABLE=Hello" >> $GITHUB_STATE
 
-      - name: Test
-        run: github
-
       - name: A
         run: var
 
