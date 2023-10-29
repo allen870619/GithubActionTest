@@ -14,8 +14,6 @@ jobs:
     needs: job1
     runs-on: self-hosted
     steps:
-      - name: A
-        run: env
       - name: Read variable
         run: echo $MY_VARIABLE
   # test-plan: 
