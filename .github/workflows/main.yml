@@ -8,7 +8,7 @@ jobs:
     runs-on: self-hosted
     steps:
       - name: Set variable
-        run: echo "MY_VARIABLE=Hello" >> $GITHUB_ENV
+        run: echo "MY_VARIABLE=Hello" >> $GITHUB_STATE
 
       - name: Test
         run: github
