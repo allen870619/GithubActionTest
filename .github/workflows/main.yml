@@ -13,8 +13,6 @@ jobs:
           uses: actions/checkout@v4
         - name: delay
           run: sleep 3
-        - name: Force leave
-          run: exit 1
         - name: Calculate Running Time
           run: |
             current_time=$(date +%s)
