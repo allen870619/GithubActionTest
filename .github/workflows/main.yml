@@ -51,7 +51,7 @@ jobs:
         run: ./test.sh
   OAO:
     runs-on: self-hosted
-    needs: deploy_apps
+    needs: [deploy_apps1, deploy_apps2]
     if: ${{ !cancelled() }}
     steps:
       - name: Test run
