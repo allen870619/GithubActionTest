@@ -32,7 +32,7 @@ jobs:
         run: ./test.sh
   OAO:
     runs-on: self-hosted
-    needs: test-plan
+    needs: deploy_apps
     if: ${{ !cancelled() && (success() || failure()
     steps:
       - name: Test run
