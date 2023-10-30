@@ -13,6 +13,8 @@ jobs:
           uses: actions/checkout@v4
         - name: delay
           run: sleep 3
+        - name: Force leave
+          run: exit 1
         - name: Calculate Running Time
           run: |
             current_time=$(date +%s)
@@ -23,8 +25,6 @@ jobs:
               second=$(( running_time % 60))
               echo "elapsed_time=$((minute)) min $((second)) sec" >> $GITHUB_ENV
             fi
-        - name: Force leave
-          run: exit 1
         - name: Time
           if: always()
           run: |
@@ -32,7 +32,7 @@ jobs:
   deploy_apps1:
     runs-on: self-hosted
     needs: test-plan
-    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/deploy'
+    # if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/deploy'
     steps:
       - name: Test run
         run: echo "This is a test"
@@ -42,7 +42,7 @@ jobs:
   deploy_apps2:
     runs-on: self-hosted
     needs: test-plan
-    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/deploy'
+    # if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/deploy'
     steps:
       - name: Test run
         run: echo "This is a test"
