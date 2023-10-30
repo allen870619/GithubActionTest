@@ -5,7 +5,7 @@ jobs:
   test-plan: 
       runs-on: self-hosted
       env:
-        elapsed_time: N/A
+        elapsed_time: Not Avbl.
       steps:
         - name: Set Job Start Time
           run: echo "start_time=$(date +%s)" >> $GITHUB_ENV
@@ -25,7 +25,7 @@ jobs:
             fi
         - name: Time
           run: |
-            echo ${{elapsed_time}}
+            echo $elapsed_time
   deploy_apps:
     runs-on: self-hosted
     needs: test-plan
