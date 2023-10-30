@@ -21,7 +21,7 @@ jobs:
             then
               minute=$(( running_time / 60))
               second=$(( running_time % 60))
-              # echo "elapsed_time=$((minute)) min $((second)) sec" >> $GITHUB_ENV
+              echo "elapsed_time=$((minute)) min $((second)) sec" >> $GITHUB_ENV
             fi
         - name: Time
           run: |
