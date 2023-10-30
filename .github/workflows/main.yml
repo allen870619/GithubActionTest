@@ -33,7 +33,7 @@ jobs:
   OAO:
     runs-on: self-hosted
     needs: deploy_apps
-    if: ${{ !cancelled() && (success() || failure()) }}
+    if: ${{ !cancelled() }}
     steps:
       - name: Test run
         run: echo "This is a test"
