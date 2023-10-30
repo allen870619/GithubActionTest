@@ -23,7 +23,17 @@ jobs:
   deploy_apps:
     runs-on: self-hosted
     needs: test-plan
-    # if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/deploy'
+    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/deploy'
+    steps:
+      - name: Test run
+        run: echo "This is a test"
+      - name: Run sh
+        working-directory: ./sc
+        run: ./test.sh
+  OAO:
+    runs-on: self-hosted
+    needs: test-plan
+    if: ${{ !cancelled() && (success() || failure()
     steps:
       - name: Test run
         run: echo "This is a test"
