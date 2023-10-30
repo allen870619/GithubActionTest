@@ -23,10 +23,23 @@ jobs:
               second=$(( running_time % 60))
               echo "elapsed_time=$((minute)) min $((second)) sec" >> $GITHUB_ENV
             fi
+        - name: Force leave
+          run: exit 1
         - name: Time
+          if: always()
           run: |
             echo $elapsed_time
-  deploy_apps:
+  deploy_apps1:
+    runs-on: self-hosted
+    needs: test-plan
+    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/deploy'
+    steps:
+      - name: Test run
+        run: echo "This is a test"
+      - name: Run sh
+        working-directory: ./sc
+        run: ./test.sh
+  deploy_apps2:
     runs-on: self-hosted
     needs: test-plan
     if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/deploy'
