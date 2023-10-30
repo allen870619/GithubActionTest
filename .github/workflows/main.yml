@@ -27,4 +27,7 @@ jobs:
     steps:
       - name: Test run
         run: echo "This is a test"
+      - name: Run sh
+        working-directory: ./sc
+        run: ./test.sh
 
