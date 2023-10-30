@@ -2,7 +2,7 @@ name: Action_test
 run-name: whole_ci_cd
 on: [push, pull_request]
 jobs:
-  test_plan: 
+  test-plan: 
       runs-on: self-hosted
       env:
         elapsed_time: "N/A"
