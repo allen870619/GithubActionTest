@@ -2,24 +2,30 @@ name: Action_test
 run-name: whole_ci_cd
 on: [push, pull_request]
 jobs:
-  test-plan: 
-    runs-on: self-hosted
-    steps:
-      - name: Checkout project file
-        uses: actions/checkout@v4
-      - name: Get Current Time
-        id: current_time
-        uses: actions/github-script@v4
-        with:
-          script: |
-            const currentTime = Math.floor(new Date().getTime() / 1000);
-            console.log(`::set-output name=time::${currentTime}`);
-      - name: Calculate Running Time
-        run: |
-          current_time=$(date +%s)
-          run_started_time=${{ env.GITHUB_RUN_ID }}
-          running_time=$((current_time - run_started_time))
-          echo "Running Time: $running_time seconds" 
+  test_plan: 
+      runs-on: self-hosted
+      env:
+        elapsed_time: "N/A"
+      steps:
+        - name: Set Job Start Time
+          run: echo "start_time=$(date +%s)" >> $GITHUB_ENV
+        - name: Checkout project file
+          uses: actions/checkout@v4
+        - name: delay
+          run: sleep 3
+        - name: Calculate Running Time
+          run: |
+            current_time=$(date +%s)
+            running_time=$((current_time - start_time))
+            if [ $running_time > 60 ]
+            then
+              minute=$(( running_time / 60))
+              second=$(( running_time % 60))
+              # echo "elapsed_time=$((minute)) min $((second)) sec" >> $GITHUB_ENV
+            fi
+        - name: Time
+          run: |
+            echo "$((env.elapsed_time))"
   deploy_apps:
     runs-on: self-hosted
     needs: test-plan
