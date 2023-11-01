@@ -2,7 +2,7 @@ name: Action_test
 run-name: whole_ci_cd
 on:
   schedule:
-    - cron:  '6 * * * *'
+    - cron: '10 * * * *'
 jobs:
   test-plan: 
       runs-on: self-hosted
