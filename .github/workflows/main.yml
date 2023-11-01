@@ -1,6 +1,8 @@
 name: Action_test
 run-name: whole_ci_cd
-on: [push, pull_request]
+on:
+  schedule:
+    - cron:  '59 * * * *'
 env:
   runner-name: self-hosted
 jobs:
