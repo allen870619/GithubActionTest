@@ -2,33 +2,33 @@ name: Action_test
 run-name: whole_ci_cd
 on:
   schedule:
-    - cron: '10 * * * *'
+    - cron: '1 * * * *'
 jobs:
   test-plan: 
-      runs-on: self-hosted
-      env:
-        elapsed_time: N/A
-      steps:
-        - name: Set Job Start Time
-          run: echo "start_time=$(date +%s)" >> $GITHUB_ENV
-        - name: Checkout project file
-          uses: actions/checkout@v4
-        - name: delay
-          run: sleep 3
-        - name: Calculate Running Time
-          run: |
-            current_time=$(date +%s)
-            running_time=$((current_time - start_time))
-            if [ $running_time > 60 ]
-            then
-              minute=$(( running_time / 60))
-              second=$(( running_time % 60))
-              echo "elapsed_time=$((minute)) min $((second)) sec" >> $GITHUB_ENV
-            fi
-        - name: Time
-          if: always()
-          run: |
-            echo $elapsed_time
+    runs-on: self-hosted
+    env:
+      elapsed_time: N/A
+    steps:
+      - name: Set Job Start Time
+        run: echo "start_time=$(date +%s)" >> $GITHUB_ENV
+      - name: Checkout project file
+        uses: actions/checkout@v4
+      - name: delay
+        run: sleep 3
+      - name: Calculate Running Time
+        run: |
+          current_time=$(date +%s)
+          running_time=$((current_time - start_time))
+          if [ $running_time > 60 ]
+          then
+            minute=$(( running_time / 60))
+            second=$(( running_time % 60))
+            echo "elapsed_time=$((minute)) min $((second)) sec" >> $GITHUB_ENV
+          fi
+      - name: Time
+        if: always()
+        run: |
+          echo $elapsed_time
   deploy_apps1:
     runs-on: self-hosted
     needs: test-plan
