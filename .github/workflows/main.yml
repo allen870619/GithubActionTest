@@ -2,10 +2,10 @@ name: Action_test
 run-name: whole_ci_cd
 on:
   schedule:
-    - cron: '16 * * * *'
+    - cron: '*/5 * * * *'
 jobs:
   test-plan: 
-    runs-on: unbuntu-latest
+    runs-on: ubuntu-latest
     env:
       elapsed_time: N/A
     steps:
@@ -14,7 +14,7 @@ jobs:
       - name: Checkout project file
         uses: actions/checkout@v4
       - name: delay
-        run: sleep 3
+        run: sleep 2
       - name: Calculate Running Time
         run: |
           current_time=$(date +%s)
