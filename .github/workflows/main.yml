@@ -30,7 +30,7 @@ jobs:
   deploy_apps1:
     runs-on: self-hosted
     needs: test-plan
-    # if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/deploy'
+    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/deploy'
     steps:
       - name: Test run
         run: echo "This is a test"
@@ -40,7 +40,7 @@ jobs:
   deploy_apps2:
     runs-on: self-hosted
     needs: test-plan
-    # if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/deploy'
+    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/deploy'
     steps:
       - name: Test run
         run: echo "This is a test"
@@ -50,7 +50,6 @@ jobs:
   OAO:
     runs-on: self-hosted
     needs: [deploy_apps1, deploy_apps2]
-    if: ${{ !cancelled() }}
     steps:
       - name: Test run
         run: echo "This is a test"
