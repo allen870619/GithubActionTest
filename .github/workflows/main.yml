@@ -1,6 +1,9 @@
 name: Action_test
 run-name: whole_ci_cd
 on:
+  push:
+    branches:
+      - main
   schedule:
     - cron: '1 * * * *'
 jobs:
