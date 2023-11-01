@@ -2,7 +2,7 @@ name: Action_test
 run-name: whole_ci_cd
 on:
   schedule:
-    - cron:  '59 * * * *'
+    - cron:  '2 * * * *'
 env:
   runner-name: self-hosted
 jobs:
