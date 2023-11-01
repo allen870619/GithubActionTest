@@ -5,7 +5,7 @@ env:
   runner-name: self-hosted
 jobs:
   test-plan: 
-      runs-on: ${{runner-name}}
+      runs-on: ${{env.runner-name}}
       env:
         elapsed_time: N/A
       steps:
@@ -30,7 +30,7 @@ jobs:
           run: |
             echo $elapsed_time
   deploy_apps1:
-    runs-on: ${{runner-name}}
+    runs-on: ${{env.runner-name}}
     needs: test-plan
     if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/deploy'
     steps:
@@ -40,7 +40,7 @@ jobs:
         working-directory: ./sc
         run: ./test.sh
   deploy_apps2:
-    runs-on: ${{runner-name}}
+    runs-on: ${{env.runner-name}}
     needs: test-plan
     if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/deploy'
     steps:
@@ -50,8 +50,8 @@ jobs:
         working-directory: ./sc
         run: ./test.sh
   OAO:
-    runs-on: ${{runner-name}}
-    needs: [deploy_apps1]
+    runs-on: ${{env.runner-name}}
+    needs: [deploy_apps1, deploy_apps2]
     steps:
       - name: Test run
         run: echo "This is a test"
