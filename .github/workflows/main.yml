@@ -5,7 +5,7 @@ on:
     - cron: '*/5 * * * *'
 jobs:
   test-plan: 
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     env:
       elapsed_time: N/A
     steps:
