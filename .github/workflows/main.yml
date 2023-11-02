@@ -12,7 +12,7 @@ jobs:
       - name: Checkout project file
         uses: actions/checkout@v4
       - name: delay
-        run: sleep 2
+        run: sleep 3
       - name: Calculate Running Time
         run: |
           current_time=$(date +%s)
