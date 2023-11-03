@@ -2,7 +2,7 @@ name: Action_test
 run-name: whole_ci_cd
 on: push
 jobs:
-  test-plan: 
+  test_plan: 
     runs-on: ${{ vars.RUNNER_LABEL }}
     env:
       elapsed_time: N/A
@@ -17,7 +17,7 @@ jobs:
         run: sleep 3
       - name: Add output
         id: add-output
-        run: echo "out_1=$(date +%s)" >> $GITHUB_OUTPUT
+        run: echo "out_1=$(date +%s)" >> "$GITHUB_OUTPUT"
       - name: Calculate Running Time
         run: |
           current_time=$(date +%s)
@@ -34,7 +34,7 @@ jobs:
           echo $elapsed_time
   job_2:
     runs-on: ${{ vars.RUNNER_LABEL }}
-    needs: test-plan
+    needs: test_plan
     steps:
       - name: print output
         run: echo "${{needs.test_plan.outputs.out_1}}"
