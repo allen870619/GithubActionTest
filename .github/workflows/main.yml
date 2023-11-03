@@ -6,8 +6,8 @@ jobs:
     runs-on: ${{ vars.RUNNER_LABEL }}
     env:
       elapsed_time: N/A
-    # outputs:
-    #   out_1: ${{ steps.add-output.outputs.out_12 }}
+    outputs:
+      out_1: ${{ steps.add-output.outputs.out_12 }}
     steps:
       - name: Set Job Start Time
         run: echo "start_time=$(date +%s)" >> $GITHUB_ENV
@@ -34,10 +34,10 @@ jobs:
           echo $elapsed_time
   job_2:
     runs-on: ${{ vars.RUNNER_LABEL }}
-    needs: test_plan
+    # needs: test_plan
     steps:
       - name: print output
-        run: echo "${{needs.test_plan.outputs.out_12}}"
+        run: echo "${{ jobs.test_plan.outputs.out_1 }}"
   # deploy_apps1:
   #   runs-on: self-hosted
   #   needs: test-plan
