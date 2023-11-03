@@ -6,6 +6,8 @@ jobs:
     runs-on: ${{ vars.RUNNER_LABEL }}
     env:
       elapsed_time: N/A
+    outputs:
+      out_1: ${{ steps.add-output.outputs.out_1 }}
     steps:
       - name: Set Job Start Time
         run: echo "start_time=$(date +%s)" >> $GITHUB_ENV
@@ -14,6 +16,7 @@ jobs:
       - name: delay
         run: sleep 3
       - name: Add output
+        id: add-output
         run: echo "out_1=$(date +%s)" >> $GITHUB_OUTPUT
       - name: Calculate Running Time
         run: |
