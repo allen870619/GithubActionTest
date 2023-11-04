@@ -1,8 +1,10 @@
-name: Action_test
+name: Action_test_1
 run-name: whole_ci_cd
 on: push
+env:
+  test_1: askldjkls
 jobs:
-  test_plan: 
+  job_1: 
     runs-on: ${{ vars.RUNNER_LABEL }}
     env:
       elapsed_time: N/A
@@ -34,10 +36,22 @@ jobs:
           echo $elapsed_time
   job_2:
     runs-on: ${{ vars.RUNNER_LABEL }}
-    # needs: test_plan
     steps:
       - name: print output
-        run: echo "${{ jobs.test_plan.outputs.out_1 }}"
+        run: echo "Hello world"
+
+  job_3:
+    runs-on: ${{ vars.RUNNER_LABEL }}
+    needs: [job_1, job_2]
+    steps:
+      - name: print output
+        run: echo "${{ needs.job_1.outputs.out_1 }}"
+
+
+
+
+
+
   # deploy_apps1:
   #   runs-on: self-hosted
   #   needs: test-plan
